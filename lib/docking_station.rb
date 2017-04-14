@@ -1,6 +1,7 @@
 # in lib/docking_sation.rb
 require './lib/bike.rb'
 require './lib/van.rb'
+require './lib/garage.rb'
 
 class DockingStation
 
