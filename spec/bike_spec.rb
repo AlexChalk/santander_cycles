@@ -13,4 +13,5 @@ describe Bike do
       expect(subject.broken).to eq true
     end
   end
+
 end
