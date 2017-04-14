@@ -2,6 +2,7 @@ require './lib/bike.rb'
 
 describe Bike do
   it { is_expected.to respond_to(:broken?) }
+  it { is_expected.to respond_to(:repair) }
   it { is_expected.to respond_to(:report_broken) }
 
   describe '#broken?' do
@@ -13,5 +14,14 @@ describe Bike do
       expect(subject.broken?).to eq true
     end
   end
+
+  describe '#repair' do
+    it "repairs broken bikes" do
+      subject.report_broken
+      subject.repair
+      expect(subject.broken?).to eq false
+    end
+  end
+
 
 end
