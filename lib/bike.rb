@@ -14,8 +14,4 @@ class Bike
     self.broken = true
   end
   
-  def repair
-    self.broken = false
-  end
-
 end

@@ -15,13 +15,4 @@ describe Bike do
     end
   end
 
-  describe '#repair' do
-    it "repairs broken bikes" do
-      subject.report_broken
-      subject.repair
-      expect(subject.broken?).to eq false
-    end
-  end
-
-
 end
