@@ -6,8 +6,8 @@ class Bike
     @broken = false
   end
 
-  def working?
-    true
+  def broken?
+    self.broken ? true : false
   end
 
   def report_broken

@@ -23,7 +23,7 @@ describe DockingStation do
   describe '#release_bike' do
     let(:bike) { double :bike }
     it 'returns a docked bike' do
-      allow(bike).to receive(:broken).and_return(false)
+      allow(bike).to receive(:broken?).and_return(false)
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
@@ -31,8 +31,7 @@ describe DockingStation do
       expect{ subject.release_bike}.to raise_error 'Error: no bikes available at this docking station.'
     end
     it 'doesn\'t return broken bikes' do
-      #bike = Bike.new; 
-      allow(bike).to receive(:broken).and_return(true)
+      allow(bike).to receive(:broken?).and_return(true)
       subject.dock(bike)
       expect{ subject.release_bike }.to raise_error 'Error: no bikes available at this docking station.'
     end
@@ -42,7 +41,7 @@ describe DockingStation do
     let(:bike) { double :bike }
     let(:station) { DockingStation.new(35) }
     before(:example) do
-      allow(bike).to receive(:broken).and_return(true)
+      allow(bike).to receive(:broken?).and_return(true)
     end
     it 'adds a bike to the docking_station\'s @bikes array' do
       subject.dock(bike)

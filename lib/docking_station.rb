@@ -21,7 +21,7 @@ class DockingStation
 
   def dock(bike)
     raise('Error: this docking station is occupied.') if full?
-    bike.broken ? broken_bikes << bike : working_bikes << bike
+    bike.broken? ? broken_bikes << bike : working_bikes << bike
   end
 
   def bikes
