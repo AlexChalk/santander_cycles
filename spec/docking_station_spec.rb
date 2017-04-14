@@ -57,6 +57,22 @@ describe DockingStation do
     end
   end
 
+  describe '#collect_working_bikes_from' do
+    let(:working_bikes_array) {[]}
+    let(:bikes_pushed) {[]}
+    let(:van) { double(:van, working_bikes: working_bikes_array) }
+    let(:bike) { double(:bike, broken?: false) }
+    before(:example) do
+      5.times { working_bikes_array << bike; bikes_pushed << bike}
+      subject.collect_working_bikes_from(van)
+    end
+    it "sends @working_bikes array to collecter.working_bikes" do
+      expect(subject.working_bikes).to eq bikes_pushed
+    end
+    it "removes bikes from @working_bikes array after transfer to collecter" do
+      expect(van.working_bikes).to be_empty
+    end
+  end
 
 
 end

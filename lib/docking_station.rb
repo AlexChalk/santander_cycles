@@ -30,6 +30,12 @@ class DockingStation
     working_bikes + broken_bikes
   end
 
+  def collect_working_bikes_from(sender)
+    until sender.working_bikes.empty? do
+      working_bikes << sender.working_bikes.pop
+    end
+  end
+
   private
 
   def full?
