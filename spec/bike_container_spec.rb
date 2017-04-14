@@ -19,7 +19,7 @@ shared_examples_for "a bike container" do
       5.times { broken_bikes_array << bike; bikes_pushed << bike}
       subject.collect_broken_bikes_from(initial_location)
     end
-    it "sends @brokens_bikes array to collecter.broken_bikes" do
+    it "sends @brokens_bikes array of deliverer to collecter" do
       expect(subject.broken_bikes).to eq bikes_pushed
     end
     it "removes bikes from @broken_bikes array after transfer to collecter" do
@@ -36,7 +36,7 @@ shared_examples_for "a bike container" do
       5.times { working_bikes_array << bike; bikes_pushed << bike}
       subject.collect_working_bikes_from(initial_location)
     end
-    it "sends @working_bikes array to collecter.working_bikes" do
+    it "sends @working_bikes array of deliverer to collecter" do
       expect(subject.working_bikes).to eq bikes_pushed
     end
     it "removes bikes from @working_bikes array after transfer to collecter" do
