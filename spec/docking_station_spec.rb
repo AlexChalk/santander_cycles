@@ -4,65 +4,52 @@ describe DockingStation do
 
   it { is_expected.to respond_to :release_bike }
 
-  it 'gets a bike' do
-    subject.dock(Bike.new)
-    expect(subject.release_bike).to be_an_instance_of Bike
-  end
+  it { is_expected.to respond_to(:dock).with(1).argument }
 
-  it 'expects the bike to be working' do
-    subject.dock(Bike.new)
-    expect(subject.release_bike).to be_working
-  end
-
-  it 'docks a bike when passed dock(bike)' do
-    expect(subject).to respond_to(:dock).with(1).argument
-  end
-
-  it 'has an attribute set to an instance of Bike post docking' do
-    bike = Bike.new
-    expect(subject.dock(bike)).to eq subject.bikes
-  end
-
-  it 'returns bike when asked for @bike' do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bikes).to include bike
-  end
-
-  it 'raises an exception when user tries to release a bike from an empty docking station' do
-    expect { subject.release_bike}.to raise_error 'Error: no bikes available at this docking station.'
-  end
-
-  it 'raises an exception when a user tries to dock a bike at a full docking station' do
-    DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
-    expect { subject.dock(Bike.new)}.to raise_error 'Error: this docking station is occupied.'
-  end
+  it { is_expected.to respond_to(:bikes) }
 
   it {is_expected.to respond_to :capacity}
 
-  it "can pass a value at initialisation" do
-    expect { DockingStation.new(25) }.to_not raise_error
+  it "can store a @capacity value at initialisation" do
+    station = DockingStation.new(25)
+    expect(station.capacity).to eq 25
   end
 
-    it "can store a capacity value at initialisation" do
-      station = DockingStation.new(25)
-      expect(station.capacity).to eq 25
-  end
-
-  it "can pass on the default capacity if none is initialised" do
+  it "stores DEFAULT_CAPACITY as @capacity if no argument is passed at initialization" do
     station = DockingStation.new()
     expect(station.capacity).to eq DockingStation::DEFAULT_CAPACITY
   end
 
-  describe "#dock" do
+  describe '#release_bike' do
+    it 'returns a docked bike' do
+      subject.dock(Bike.new)
+      expect(subject.release_bike).to be_an_instance_of Bike
+    end
+    it 'returns working bikes' do
+      subject.dock(Bike.new)
+      expect(subject.release_bike).to be_working
+    end
+    it 'raises an exception when user tries to release a bike from an empty docking station' do
+      expect { subject.release_bike}.to raise_error 'Error: no bikes available at this docking station.'
+    end
+  end
+
+  describe '#dock' do
     let(:bike) { Bike.new }
     let(:station) { DockingStation.new(35) }
-    it "allows correct number of bikes to be docked when custom capacity has been set" do
+    it 'adds a bike to the docking_station\'s @bikes array' do
+      subject.dock(bike)
+      expect(subject.bikes).to include bike
+    end
+    it 'raises an exception when a user tries to dock a bike at a full docking station' do
+      DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
+      expect { subject.dock(Bike.new)}.to raise_error 'Error: this docking station is occupied.'
+    end
+    it "allows a different number of bikes to be docked when a custom @capacity has been set for the DockingStation" do
       35.times { station.dock(bike) }
       expect { station.dock(bike) }.to raise_error 'Error: this docking station is occupied.'
     end
   end
-
 
 
 
