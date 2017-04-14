@@ -1,7 +1,9 @@
 require './lib/docking_station'
+require './spec/bike_container_spec.rb'
 
 describe DockingStation do
 
+  it_behaves_like "a bike container"
   it { is_expected.to respond_to :release_bike }
 
   it { is_expected.to respond_to(:dock).with(1).argument }
@@ -56,23 +58,5 @@ describe DockingStation do
       expect { station.dock(bike) }.to raise_error 'Error: this docking station is occupied.'
     end
   end
-
-  describe '#collect_working_bikes_from' do
-    let(:working_bikes_array) {[]}
-    let(:bikes_pushed) {[]}
-    let(:van) { double(:van, working_bikes: working_bikes_array) }
-    let(:bike) { double(:bike, broken?: false) }
-    before(:example) do
-      5.times { working_bikes_array << bike; bikes_pushed << bike}
-      subject.collect_working_bikes_from(van)
-    end
-    it "sends @working_bikes array to collecter.working_bikes" do
-      expect(subject.working_bikes).to eq bikes_pushed
-    end
-    it "removes bikes from @working_bikes array after transfer to collecter" do
-      expect(van.working_bikes).to be_empty
-    end
-  end
-
 
 end

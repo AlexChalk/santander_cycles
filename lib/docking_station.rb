@@ -2,11 +2,13 @@
 require './lib/bike.rb'
 require './lib/van.rb'
 require './lib/garage.rb'
+require './lib/bike_container.rb'
 
 class DockingStation
 
+  include BikeContainer
+
   attr_reader :capacity
-  attr_accessor :working_bikes, :broken_bikes
 
   DEFAULT_CAPACITY = 20
 
@@ -28,12 +30,6 @@ class DockingStation
 
   def bikes
     working_bikes + broken_bikes
-  end
-
-  def collect_working_bikes_from(sender)
-    until sender.working_bikes.empty? do
-      working_bikes << sender.working_bikes.pop
-    end
   end
 
   private
