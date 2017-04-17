@@ -1,5 +1,5 @@
 require 'garage'
-require './spec/bike_container_spec.rb'
+require './spec/support/bike_container'
 
 describe Garage do
 

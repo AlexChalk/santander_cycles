@@ -1,6 +1,6 @@
 require 'bike_container'
 
-shared_examples_for "a bike container" do
+RSpec.shared_examples "a bike container" do
   let(:bike_container) { described_class.new }
 
   it { is_expected.to respond_to(:broken_bikes) }
