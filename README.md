@@ -17,7 +17,23 @@ More detailed, OS-specific instructions are available on ruby-lang's [installati
 
 ## Usage
 
-The only way to run this project at present is in a REPL such as IRB (installed with Ruby), or Pry (`gem install pry`). Run `irb` or `pry` from the project root, followed by `require './lib/docking_station.rb'`. 
+The only way to run this project at present is in a REPL such as IRB (installed with Ruby), or Pry (`gem install pry`). Run `irb` or `pry` from the project root, followed by `require './lib/docking_station.rb'`. Here is an example of the application in use:
+
+```
+[2] pry(main)> station = DockingStation.new
+=> #<DockingStation:0x007fa1011f9ee8 @broken_bikes=[], @capacity=20, @working_bikes=[]>
+[3] pry(main)> bike = Bike.new
+=> #<Bike:0x007fa1010b8930 @broken=false>
+[4] pry(main)> bike.report_broken
+=> true
+```
+
+You can do the following:
+* create docking stations, bikes, vans, and garages; 
+* dock and release bikes at docking stations; 
+* report bikes as broken;
+* repair bikes at garages; and
+* transport bikes from docking stations to garages and vice-versa using vans.
 
 ## Running tests
 
